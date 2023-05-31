@@ -2,8 +2,8 @@
 #EN ESTE CODIGO SE INGRESA EL ESPACIO COMO TERMINAL, DE MODO A QUE TODA LA LISTA SEA PROCESADA DE UNA POR EL TDS
 
 # cadena -> letraR
-# R -> letraR | Ɛ
-# letra -> a| ... | z | ' '
+# R -> letraR | ' 'letraR | Ɛ
+# letra -> a| ... | z 
 
 entrada_inicial = input('Ingrese la lista de cadenas: ')
 entrada = ' '.join(entrada_inicial.split())
@@ -42,16 +42,35 @@ def R(v, c, p, max_v):
 
     global input
     
-    if input == 'a' or input == 'b' or input == 'c' or input == 'd' or input == 'e' or input == 'f' or input == 'g' or input == 'h' or input == 'i' or input == 'j' or input == 'k' or input == 'l' or input == 'm' or input == 'n' or input == 'ñ' or input == 'o' or input == 'p' or input == 'q' or input == 'r' or input == 's' or input == 't' or input == 'u' or input == 'v' or input == 'w' or input == 'x' or input == 'y' or input == 'z' or input == ' ':
+    if input == 'a' or input == 'b' or input == 'c' or input == 'd' or input == 'e' or input == 'f' or input == 'g' or input == 'h' or input == 'i' or input == 'j' or input == 'k' or input == 'l' or input == 'm' or input == 'n' or input == 'ñ' or input == 'o' or input == 'p' or input == 'q' or input == 'r' or input == 's' or input == 't' or input == 'u' or input == 'v' or input == 'w' or input == 'x' or input == 'y' or input == 'z':
         
         v, c, p, max_v = letra(v, c, p, max_v)
         v, c, p, max_v = R(v, c, p, max_v)
 
         return v, c, p, max_v
+    
+    elif input == ' ': # fin de una cadena, inicia otra
+
+        match(' ')
+
+        # cantidad de palabras en que las vocales se encuentran en mayor o igual cantidad que las consonantes
+        if v >= c and (v != 0 or c != 0): # si se proceso una cadena valida v o c no deben ser 0 al mismo tiempo. Ej cadena invalida: 23
+            p = p + 1
+
+        #mayor cantidad de vocales en una o mas palabras
+        if v > max_v:
+            max_v = v
+
+        v = 0
+        c = 0 
+
+        v, c, p, max_v = letra(v, c, p, max_v)
+        v, c, p, max_v = R(v, c, p, max_v)
+
+        return  v, c, p, max_v
 
     else: #fin de entrada
 
-        #SE REPITEEE
 
         # cantidad de palabras en que las vocales se encuentran en mayor o igual cantidad que las consonantes
         if v >= c and (v != 0 or c != 0): # si se proceso una cadena valida v o c no deben ser 0 al mismo tiempo. Ej cadena invalida: 23
@@ -148,27 +167,16 @@ def letra(v, c, p, max_v):
     elif input == 'y': 
         match('y')
         c = c + 1
-    elif input == 'z': 
-        match('z')
-        c = c + 1        
-    else: # fin una cadena
-
+      
+    else: 
+        
         anterior = input # en match el input se va actualizar y pierdo el valor anterior
+        
+        match('z')
 
-        match(' ')
-
-        if anterior == ' ': #fin de una cadena. El if porque cualquier caracter puede entrar aqui
-
-            # cantidad de palabras en que las vocales se encuentran en mayor o igual cantidad que las consonantes
-            if v >= c and (v != 0 or c != 0): # si se proceso una cadena valida v o c no deben ser 0 al mismo tiempo. Ej cadena invalida: 23
-                p = p + 1
-
-            #mayor cantidad de vocales en una o mas palabras
-            if v > max_v:
-                max_v = v
-
-            v = 0
-            c = 0 
+        # con gestion de errores la ejecucion continua y puede caer cualquier caracter aqui, por eso se coloca el if
+        if anterior == 'z':
+            c = c + 1
 
     return v, c, p, max_v
 

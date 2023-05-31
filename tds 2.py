@@ -1,6 +1,12 @@
 #SOlUCION NRO 1 PARA EL ESPACIO
 #EN ESTE CODIGO SE PREPROCESA LA ENTRADA DE MODO A OBTENER CADA ELEMENTO DE LA LISTA Y PASARLO DE A UNO AL TDS
 
+# TDS PARA GENERAR UNA CADENA CON CUALQUIER COMBINACION DE LETRAS MINUSCULAS
+
+# cadena -> letraR
+# R -> letraR | Ɛ
+# letra -> a| ... | z 
+
 entrada_inicial = input('Ingrese la lista de cadenas: ')
 array_entrada = entrada_inicial.split()
 i = 0
