@@ -1,12 +1,19 @@
-#SOlUCION NRO 2 PARA EL ESPACIO
+#SOlUCION NRO 3 PARA EL ESPACIO
 #EN ESTE CODIGO SE INGRESA EL ESPACIO COMO TERMINAL, DE MODO A QUE TODA LA LISTA SEA PROCESADA DE UNA POR EL TDS
 
 # cadena -> letraR
 # R -> letraR | ' 'letraR | Ɛ
-# letra -> a| ... | z 
+# letra -> a| ... | z
+
+# P(cadena) = {a, ..., z}               S(cadena)  = {$}
+# P(R) = {a,...,z} u {' '} u {Ɛ}        S(R) = S(cadena) = {$}
+# P(letra) = {a} u ... u {z}            S(letra) = P(R) u S(cadena)=  {a,...,z, ' ', $}
+
+ 
 
 entrada_inicial = input('Ingrese la lista de cadenas: ')
-entrada = ' '.join(entrada_inicial.split())
+#entrada = ' '.join(entrada_inicial.split())
+entrada = entrada_inicial
 i = 0
 input = entrada[i]
 salida = ''
@@ -192,7 +199,7 @@ def match(t):
         salida = salida + input
         avanzar_input()
     else:
-        print('warning, el caracter '+input+ ' no pertenece al alfabeto') 
+        print_warning(input)
         manejo_errores()
     
     
@@ -205,10 +212,12 @@ def avanzar_input():
     i = i + 1 #avanza indice
 
     if i < len(entrada) : #todavia hay caracteres a procesar
-    
-        if pertenece_a_alfabeto(entrada[i]):
-            input = entrada[i]
-        else:
+        
+        input = entrada[i]
+        
+        if not pertenece_a_alfabeto(input):
+
+            print_warning(input)
             manejo_errores()
 
     else:
@@ -216,20 +225,24 @@ def avanzar_input():
 
 def manejo_errores():
 
-    #ignora caracteres extranhos y avanza para procesar siguiente caracter
+    #ignora caracteres extranhos y avanza el input hasta encontrar uno que pertenezca al alfabeto
     
     global input
     global entrada
     global i
     global salida
 
-    while i < len(entrada)-1 and pertenece_a_alfabeto(entrada[i]) == False:
+    if i == len(entrada)-1: #ultima posicion, ya no se puede avanzar
+        input = ''
+
+    #mientras haya caracter a procesar y este no pertenezca al alfabeto
+    while i < len(entrada)-1 and pertenece_a_alfabeto(entrada[i]) == False:    
         i = i + 1
         input = entrada[i]
 
         if(pertenece_a_alfabeto(input) == False):
             
-            print('warning, el caracter '+input+ ' no pertenece al alfabeto')
+            print_warning(input)
 
             if i == len(entrada):
                 input = ''
@@ -241,6 +254,10 @@ def pertenece_a_alfabeto(caracter):
         return True
     else:
         return False
-    
+
+def print_warning(caracter):
+
+    if caracter != '': #evita mostrar warning del final de cadena   
+        print("warning: '"+ caracter + "'")  
 
 S()

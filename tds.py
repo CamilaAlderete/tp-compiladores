@@ -1,3 +1,17 @@
+# Este TDS recibe una lista de cadenas, donde las cadenas son cualquier combinacion de letras minusculas
+
+# El match trata el espacio lo que permite continuar la ejecucion al procesar listas
+
+# Problema: No se puede realizar los calculos requeridos por el enunciado porque el espacio es ignorado durante el match 
+# y el TDS toma la lista como una sola cadena junta.
+# Ejemplo: 'abc de' -> 'abcde' 
+# Posible solucion: hacer globales las variables involucradas y modificarlas en el match al encontrar un espacio, pero esto no
+# corresponde al match.
+
+# cadena -> letraR
+# R -> letraR | Ɛ
+# letra -> a| ... | z 
+
 entrada_inicial = input('Ingrese la lista de cadenas: ')
 entrada = ' '.join(entrada_inicial.split())
 i = 0
