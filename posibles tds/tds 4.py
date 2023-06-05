@@ -12,19 +12,17 @@
  
 
 entrada_inicial = input('Ingrese la lista de cadenas: ')
-#entrada = ' '.join(entrada_inicial.split())
 entrada = entrada_inicial
 i = 0
 input = entrada[i]
 salida = ''
 
 
-
 def S():
 
-    global entrada, salida
+    global entrada, salida, warning
 
-    print('Entrada: ' +entrada)
+    print('\nEntrada: ' +entrada)
 
     v = 0
     c = 0
@@ -33,9 +31,12 @@ def S():
     
     v, c, p, max_v = cadena(v, c, p, max_v)
 
-    print('Entrada procesada: '+salida)
-    print('Palabras: '+  str(p))
-    print('Cantidad maxima de vocales: '+ str(max_v))
+    resultado = 'Entrada procesada: '+ salida + "\n"+\
+                'Palabras: '+  str(p) + "\n"+\
+                'Cantidad maxima de vocales: '+ str(max_v) + "\n"
+    
+    print(resultado)
+
 
 
 def cadena(v, c, p, max_v):
@@ -256,7 +257,7 @@ def pertenece_a_alfabeto(caracter):
         return False
 
 def print_warning(caracter):
-
+    
     if caracter != '': #evita mostrar warning del final de cadena   
         print("warning: '"+ caracter + "'")  
 
