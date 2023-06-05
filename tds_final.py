@@ -54,11 +54,11 @@ def S():
     p = 0
     max_v = 0
     
-    v, c, p, max_v = cadena(v, c, p, max_v)
+    v_sin, c_sin, p_sin, max_v_sin = cadena(v, c, p, max_v)
 
     resultado = 'Entrada procesada: '+ salida + "\n"+\
-                'Palabras: '+  str(p) + "\n"+\
-                'Cantidad maxima de vocales: '+ str(max_v) + "\n"+\
+                'Palabras: '+  str(p_sin) + "\n"+\
+                'Cantidad maxima de vocales: '+ str(max_v_sin) + "\n"+\
                 warning
     
     return resultado
@@ -67,10 +67,10 @@ def S():
 
 def cadena(v, c, p, max_v):
 
-    v, c, p, max_v = letra(v, c, p, max_v)
-    v, c, p, max_v = R(v, c, p, max_v)
+    v_val, c_val = letra(v, c)
+    v_sin, c_sin, p_sin, max_v_sin = R(v_val, c_val, p, max_v)
 
-    return v, c, p, max_v
+    return v_sin, c_sin, p_sin, max_v_sin
 
 def R(v, c, p, max_v):  
 
@@ -78,10 +78,10 @@ def R(v, c, p, max_v):
     
     if input == 'a' or input == 'b' or input == 'c' or input == 'd' or input == 'e' or input == 'f' or input == 'g' or input == 'h' or input == 'i' or input == 'j' or input == 'k' or input == 'l' or input == 'm' or input == 'n' or input == 'ñ' or input == 'o' or input == 'p' or input == 'q' or input == 'r' or input == 's' or input == 't' or input == 'u' or input == 'v' or input == 'w' or input == 'x' or input == 'y' or input == 'z':
         
-        v, c, p, max_v = letra(v, c, p, max_v)
-        v, c, p, max_v = R(v, c, p, max_v)
+        v_val, c_val = letra(v, c)
+        v_sin, c_sin, p_sin, max_v_sin = R(v_val, c_val, p, max_v)
 
-        return v, c, p, max_v
+        return v_sin, c_sin, p_sin, max_v_sin
     
     elif input == ' ': # fin de una cadena, inicia otra
 
@@ -98,10 +98,10 @@ def R(v, c, p, max_v):
         v = 0
         c = 0 
 
-        v, c, p, max_v = letra(v, c, p, max_v)
-        v, c, p, max_v = R(v, c, p, max_v)
+        v_val, c_val = letra(v, c)
+        v_sin, c_sin, p_sin, max_v_sin = R(v_val, c_val, p, max_v)
 
-        return  v, c, p, max_v
+        return  v_sin, c_sin, p_sin, max_v_sin
 
     else: #fin de entrada
 
@@ -116,10 +116,16 @@ def R(v, c, p, max_v):
 
         v = 0
         c = 0 
-        
-        return v, c, p, max_v
 
-def letra(v, c, p, max_v):
+        #para que concuerde con las reglas semanticas
+        v_sin = v 
+        c_sin = c
+        p_sin = p
+        max_v_sin = max_v
+        
+        return v_sin, c_sin, p_sin, max_v_sin
+
+def letra(v, c):
 
     global input
     
@@ -212,7 +218,7 @@ def letra(v, c, p, max_v):
         if anterior == 'z':
             c = c + 1
 
-    return v, c, p, max_v
+    return v, c
 
 
 
